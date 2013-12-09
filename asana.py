@@ -219,11 +219,8 @@ class AsanaAPI(object):
         :param include_archived: true to include archived tasks
         """
         # Sanitise our include_archived variable
-        if include_archived:
-            include_archived = "true"
-        else:
-            include_archived = "false"
-        return self._asana('projects/%d/tasks?include_archived=%s' % (
+        include_archived = 'true' if include_archived else 'false'
+        return self._asana('projects/%d/tasks?include_archived=%s&opt_fields=name,completed,notes' % (
             project_id, include_archived))
 
     def list_stories(self, task_id):
