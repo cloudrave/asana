@@ -179,12 +179,8 @@ class AsanaAPI(object):
         :param include_archived: true to include archived tasks
         """
         # Sanitise our include_archived variable
-        if include_archived:
-            include_archived = "true"
-        else:
-            include_archived = "false"
         target = "tasks?workspace=%d&assignee=%s&include_archived=%s" % (
-            workspace, assignee, include_archived)
+            workspace, assignee, json.dumps(include_archived))
         return self._asana(target)
 
     def get_task(self, task_id):
